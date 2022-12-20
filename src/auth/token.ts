@@ -10,10 +10,14 @@ export default class AuthService {
     this.user = user;
   }
 
-  createToken = (): string => sign({ data: this.user }, this.SECRET_KEY, {
-    expiresIn: '5h',
-    algorithm: 'HS256',
-  });
+  createToken = (): string => {
+    const { username, id } = this.user;
+
+    return sign({ data: username, id }, this.SECRET_KEY, {
+      expiresIn: '5h',
+      algorithm: 'HS256',
+    });
+  };
 
   verifyToken = (token: string) => {
     try {

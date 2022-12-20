@@ -14,4 +14,15 @@ export default class UserController {
 
     return res.status(StatusCodes.CREATED).json({ token });
   };
+
+  public login = async (req: Request, res: Response): Promise<Response> => {
+    const { username, password } = req.body;
+    const { type, message } = await this.service.login(username, password);
+
+    if (type === 'BAD_REQUEST') return res.status(StatusCodes.BAD_REQUEST).json({ message });
+
+    if (type === 'UNAUTHORIZED') return res.status(StatusCodes.UNAUTHORIZED).json({ message });
+
+    return res.status(StatusCodes.OK).json({ token: message });
+  };
 }
