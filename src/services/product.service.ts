@@ -1,5 +1,6 @@
 import connection from '../models/connection';
-import ProductModel, { Product } from '../models/product.model';
+import ProductModel from '../models/product.model';
+import { Product } from '../interfaces/product.interface';
 import 'express-async-errors';
 
 export default class ProductService {
@@ -10,4 +11,6 @@ export default class ProductService {
   }
 
   public create = async (product: Product): Promise<Product> => this.model.create(product);
+
+  public getAll = async (): Promise<Product[]> => this.model.getAll();
 }
