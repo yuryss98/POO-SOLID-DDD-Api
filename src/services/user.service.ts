@@ -1,8 +1,8 @@
 import connection from '../models/connection';
 import UserModel from '../models/user.model';
 import { User } from '../interfaces/user.interface';
-import AuthService from '../auth/token';
 import 'express-async-errors';
+import AuthService from '../auth/token';
 
 export default class UserService {
   private model: UserModel;
