@@ -14,4 +14,20 @@ export default class OrderController {
 
     return res.status(StatusCodes.OK).json(order);
   };
+
+  public create = async (req: Request, res: Response): Promise<Response> => {
+    const { user, productsIds } = req.body;
+    const { type, message } = await this.service.create(user, productsIds);
+
+    if (type === 'BAD_REQUEST') return res.status(StatusCodes.BAD_REQUEST).json({ message });
+
+    if (type === 'UNPROCESSABLE_ENTITY') { 
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message }); 
+    }
+
+    return res.status(StatusCodes.CREATED).json({
+      userId: user.id,
+      productsIds,
+    });
+  };
 }

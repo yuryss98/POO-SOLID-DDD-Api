@@ -6,6 +6,7 @@ const amount = Joi.string().min(3).required();
 const username = Joi.string().min(3).required();
 const vocation = Joi.string().min(3).required();
 const level = Joi.number().min(1).required();
+const productsIds = Joi.array().items(Joi.number()).min(1).required();
 
 export const loginSchema = Joi.object({
   username,
@@ -22,4 +23,10 @@ export const userSchema = Joi.object({
   vocation,
   level,
   password,
+});
+
+export const orderSchema = Joi.object({
+  productsIds,
+}).required().messages({
+  'array.min': '{#label} must include only numbers',
 });

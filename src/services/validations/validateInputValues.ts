@@ -1,5 +1,6 @@
+import { ValidationError } from 'joi';
 import { Response } from '../../interfaces/response.interface';
-import { loginSchema, productSchema, userSchema } from './schemas';
+import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
 
 export const validateLogin = (username: string, password: string): Response => {
   const { error } = loginSchema.validate({ username, password });
@@ -9,9 +10,7 @@ export const validateLogin = (username: string, password: string): Response => {
   return { type: null, message: '' };
 };
 
-export const validatesTheCreationOfAProduct = (name: string, amount: string) => {
-  const { error } = productSchema.validate({ name, amount });
-  
+const checkError = (error: ValidationError | undefined) => {
   if (error) {
     if (error.message.includes('is required')) {
       return { type: 'BAD_REQUEST', message: error.message };
@@ -21,6 +20,12 @@ export const validatesTheCreationOfAProduct = (name: string, amount: string) => 
   }
 
   return { type: null, message: '' };
+};
+
+export const validatesTheCreationOfAProduct = (name: string, amount: string) => {
+  const { error } = productSchema.validate({ name, amount });
+  
+  return checkError(error);
 };
 
 export const validatesTheCreationOfAUser = (
@@ -31,13 +36,11 @@ export const validatesTheCreationOfAUser = (
 ) => {
   const { error } = userSchema.validate({ username, vocation, level, password });
   
-  if (error) {
-    if (error.message.includes('is required')) {
-      return { type: 'BAD_REQUEST', message: error.message };
-    }
+  return checkError(error);
+};
 
-    return { type: 'UNPROCESSABLE_ENTITY', message: error.message };
-  }
+export const validatesAnOrderRecord = (productsIds: number[]) => {
+  const { error } = orderSchema.validate({ productsIds });
 
-  return { type: null, message: '' };
+  return checkError(error);
 };

@@ -19,8 +19,8 @@ export default class UserService {
     if (type) return { type, message };
 
     const newUser = await this.model.create(user);
-    const auth = new AuthService(newUser);
-    const token = auth.createToken();
+    const auth = new AuthService();
+    const token = auth.createToken(newUser);
 
     return { type: null, message: token };
   };
@@ -35,8 +35,8 @@ export default class UserService {
       return { type: 'UNAUTHORIZED', message: 'Username or password invalid' };
     }
 
-    const auth = new AuthService(user);
-    const token = auth.createToken();
+    const auth = new AuthService();
+    const token = auth.createToken(user);
 
     return { type: null, message: token };
   };
