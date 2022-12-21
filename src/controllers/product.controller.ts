@@ -10,9 +10,17 @@ export default class ProductController {
   }
 
   public create = async (req: Request, res: Response): Promise<Response> => {
-    const newProduct = await this.service.create(req.body);
+    const { type, message } = await this.service.create(req.body);
 
-    return res.status(StatusCodes.CREATED).json(newProduct);
+    if (type) {
+      if (type === 'BAD_REQUEST') {
+        return res.status(StatusCodes.BAD_REQUEST).json({ message });
+      }
+
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message });
+    }
+
+    return res.status(StatusCodes.CREATED).json(message);
   };
 
   public getAll = async (_req: Request, res: Response): Promise<Response> => {

@@ -4,7 +4,7 @@ import { User } from '../interfaces/user.interface';
 import 'express-async-errors';
 import AuthService from '../auth/token';
 import { Response } from '../interfaces/response.interface';
-import login from './validations/validateInputValues';
+import { validateLogin } from './validations/validateInputValues';
 
 export default class UserService {
   private model: UserModel;
@@ -22,7 +22,7 @@ export default class UserService {
   };
 
   public login = async (username: string, password: string): Promise<Response> => {
-    const { type, message } = login(username, password);
+    const { type, message } = validateLogin(username, password);
     if (type) return { type, message };
 
     const user = await this.model.login(username);
