@@ -4,7 +4,7 @@ import { User } from '../interfaces/user.interface';
 import 'express-async-errors';
 import AuthService from '../auth/token';
 import { Response } from '../interfaces/response.interface';
-import { validateLogin } from './validations/validateInputValues';
+import { validateLogin, validatesTheCreationOfAUser } from './validations/validateInputValues';
 
 export default class UserService {
   private model: UserModel;
@@ -13,12 +13,16 @@ export default class UserService {
     this.model = new UserModel(connection);
   }
 
-  public create = async (user: User): Promise<string> => {
+  public create = async (user: User): Promise<Response> => {
+    const { level, username, vocation, password } = user;
+    const { type, message } = validatesTheCreationOfAUser(username, vocation, level, password);
+    if (type) return { type, message };
+
     const newUser = await this.model.create(user);
     const auth = new AuthService(newUser);
     const token = auth.createToken();
 
-    return token;
+    return { type: null, message: token };
   };
 
   public login = async (username: string, password: string): Promise<Response> => {

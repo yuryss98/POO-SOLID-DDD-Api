@@ -1,9 +1,11 @@
 import Joi from 'joi';
 
-const username = Joi.string().required();
-const password = Joi.string().required();
+const password = Joi.string().min(8).required();
 const name = Joi.string().min(3).required();
 const amount = Joi.string().min(3).required();
+const username = Joi.string().min(3).required();
+const vocation = Joi.string().min(3).required();
+const level = Joi.number().min(1).required();
 
 export const loginSchema = Joi.object({
   username,
@@ -13,4 +15,11 @@ export const loginSchema = Joi.object({
 export const productSchema = Joi.object({
   name,
   amount,
+});
+
+export const userSchema = Joi.object({
+  username,
+  vocation,
+  level,
+  password,
 });

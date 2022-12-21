@@ -12,12 +12,10 @@ export default class ProductController {
   public create = async (req: Request, res: Response): Promise<Response> => {
     const { type, message } = await this.service.create(req.body);
 
-    if (type) {
-      if (type === 'BAD_REQUEST') {
-        return res.status(StatusCodes.BAD_REQUEST).json({ message });
-      }
+    if (type === 'BAD_REQUEST') return res.status(StatusCodes.BAD_REQUEST).json({ message });
 
-      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message });
+    if (type === 'UNPROCESSABLE_ENTITY') { 
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message }); 
     }
 
     return res.status(StatusCodes.CREATED).json(message);

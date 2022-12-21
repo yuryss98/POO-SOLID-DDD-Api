@@ -10,9 +10,15 @@ export default class UserController {
   }
 
   public create = async (req: Request, res: Response): Promise<Response> => {
-    const token = await this.service.create(req.body);
+    const { type, message } = await this.service.create(req.body);
+    
+    if (type === 'BAD_REQUEST') return res.status(StatusCodes.BAD_REQUEST).json({ message });
 
-    return res.status(StatusCodes.CREATED).json({ token });
+    if (type === 'UNPROCESSABLE_ENTITY') { 
+      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message }); 
+    }
+
+    return res.status(StatusCodes.CREATED).json({ token: message });
   };
 
   public login = async (req: Request, res: Response): Promise<Response> => {
