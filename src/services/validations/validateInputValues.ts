@@ -1,8 +1,9 @@
 import { ValidationError } from 'joi';
 import { Response } from '../../interfaces/response.interface';
 import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
+import { User } from '../../interfaces/user.interface';
 
-export const validateLogin = (username: string, password: string): Response => {
+export const validateLogin = ({ username, password }: Partial<User>): Response => {
   const { error } = loginSchema.validate({ username, password });
   
   if (error) return { type: 'BAD_REQUEST', message: error.message };

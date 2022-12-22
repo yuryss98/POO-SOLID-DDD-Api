@@ -26,7 +26,7 @@ export default class UserService {
   };
 
   public login = async (username: string, password: string): Promise<Response> => {
-    const { type, message } = validateLogin(username, password);
+    const { type, message } = validateLogin({ username, password });
     if (type) return { type, message };
 
     const user = await this.model.login(username);
