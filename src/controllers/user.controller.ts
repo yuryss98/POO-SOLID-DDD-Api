@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import UserService from '../services/user.service';
-import StatusCodeMapper from '../utils/statusCodeMapper';
+import { StatusCodeMapper } from '../utils/statusCodeMapper';
 
 export default class UserController {
   private service;

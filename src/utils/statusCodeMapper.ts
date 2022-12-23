@@ -2,7 +2,7 @@ type StringKey = {
   [key: string]: number
 };
 
-const StatusCode: StringKey = {
+export const StatusCode: StringKey = {
   OK: 200,
   CREATED: 201,
   BAD_REQUEST: 400,
@@ -10,6 +10,4 @@ const StatusCode: StringKey = {
   UNPROCESSABLE_ENTITY: 422,
 };
 
-const StatusCodeMapper = (type: string): number => StatusCode[type];
-
-export default StatusCodeMapper;
+export const StatusCodeMapper = (type: string): number => StatusCode[type];

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import ProductService from '../services/product.service';
-import StatusCodeMapper from '../utils/statusCodeMapper';
+import { StatusCodeMapper } from '../utils/statusCodeMapper';
 
 export default class ProductController {
   private service;
