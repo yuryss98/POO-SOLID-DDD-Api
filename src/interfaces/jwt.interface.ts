@@ -1,6 +1,8 @@
 export interface Jwt {
-  data: string;
-  id: number;
-  iat: number;
-  exp: number;
+  user : {
+    data: {
+      username: string;
+      userId: number;
+    }
+  }
 }

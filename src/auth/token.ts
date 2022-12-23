@@ -7,7 +7,7 @@ export default class AuthService {
   createToken = (user: User): string => {
     const { username, id } = user;
 
-    return sign({ data: username, id }, this.SECRET_KEY, {
+    return sign({ data: { username, userId: id } }, this.SECRET_KEY, {
       expiresIn: '5h',
       algorithm: 'HS256',
     });

@@ -1,26 +1,26 @@
 import { ValidationError } from 'joi';
-import { Response } from '../../interfaces/response.interface';
+import { ResponseForClient } from '../../interfaces/response.interface';
 import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
 import { User } from '../../interfaces/user.interface';
 
-export const validateLogin = ({ username, password }: Partial<User>): Response => {
+export const validateLogin = ({ username, password }: Partial<User>): ResponseForClient => {
   const { error } = loginSchema.validate({ username, password });
   
-  if (error) return { type: 'BAD_REQUEST', message: error.message };
+  if (error) return { type: 'BAD_REQUEST', message: { message: error.message } };
 
-  return { type: null, message: '' };
+  return { type: '', message: '' };
 };
 
 const checkError = (error: ValidationError | undefined) => {
   if (error) {
     if (error.message.includes('is required')) {
-      return { type: 'BAD_REQUEST', message: error.message };
+      return { type: 'BAD_REQUEST', message: { message: error.message } };
     }
 
-    return { type: 'UNPROCESSABLE_ENTITY', message: error.message };
+    return { type: 'UNPROCESSABLE_ENTITY', message: { message: error.message } };
   }
 
-  return { type: null, message: '' };
+  return { type: '', message: '' };
 };
 
 export const validatesTheCreationOfAProduct = (name: string, amount: string) => {

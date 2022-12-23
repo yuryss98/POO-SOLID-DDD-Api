@@ -1,10 +1,9 @@
 import connection from '../models/connection';
 import OrderModel from '../models/order.model';
 import 'express-async-errors';
-import { Order } from '../interfaces/order.interface';
-import { Response } from '../interfaces/response.interface';
+import { ResponseForClient } from '../interfaces/response.interface';
 import { validatesAnOrderRecord } from './validations/validateInputValues';
-import { Jwt } from '../interfaces/jwt.interface';
+import { Order } from '../interfaces/order.interface';
 
 export default class OrderService {
   private model;
@@ -13,14 +12,19 @@ export default class OrderService {
     this.model = new OrderModel(connection);
   }
 
-  public getAll = async (): Promise<Order[]> => this.model.getAll();
+  public getAll = async (): Promise<ResponseForClient> => {
+    const orders = await this.model.getAll();
 
-  public create = async (user: Jwt, productsIds: number[]): Promise<Response> => {
+    return { type: 'OK', message: orders };
+  };
+
+  public create = async ({ user, productsIds }: Order): Promise<ResponseForClient> => {
+    const { data: { userId } } = user;
     const { type, message } = validatesAnOrderRecord(productsIds);
-    if (type) return { type, message };
+    if (type.length) return { type, message };
 
-    await this.model.create(user.id, productsIds);
+    await this.model.create(userId, productsIds);
 
-    return { type: null, message: '' };
+    return { type: 'CREATED', message: { userId, productsIds } };
   };
 }
