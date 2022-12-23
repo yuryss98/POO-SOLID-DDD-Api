@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import ProductService from '../services/product.service';
+import ErrorMap from '../utils/errorMap';
 
 export default class ProductController {
   private service;
@@ -12,11 +13,7 @@ export default class ProductController {
   public create = async (req: Request, res: Response): Promise<Response> => {
     const { type, message } = await this.service.create(req.body);
 
-    if (type === 'BAD_REQUEST') return res.status(StatusCodes.BAD_REQUEST).json({ message });
-
-    if (type === 'UNPROCESSABLE_ENTITY') { 
-      return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message }); 
-    }
+    if (type) return res.status(ErrorMap(type)).json({ message });
 
     return res.status(StatusCodes.CREATED).json(message);
   };
