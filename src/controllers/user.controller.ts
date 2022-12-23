@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import UserService from '../services/user.service';
 
 export default class UserController {
-  private service: UserService;
+  private service;
 
   constructor() {
     this.service = new UserService();

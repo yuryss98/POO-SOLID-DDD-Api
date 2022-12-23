@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import ProductService from '../services/product.service';
 
 export default class ProductController {
-  private service: ProductService;
+  private service;
 
   constructor() {
     this.service = new ProductService();

@@ -7,7 +7,7 @@ import { validatesAnOrderRecord } from './validations/validateInputValues';
 import { Jwt } from '../interfaces/jwt.interface';
 
 export default class OrderService {
-  private model: OrderModel;
+  private model;
 
   constructor() {
     this.model = new OrderModel(connection);

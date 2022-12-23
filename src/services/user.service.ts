@@ -7,7 +7,7 @@ import { Response } from '../interfaces/response.interface';
 import { validateLogin, validatesTheCreationOfAUser } from './validations/validateInputValues';
 
 export default class UserService {
-  private model: UserModel;
+  private model;
 
   constructor() {
     this.model = new UserModel(connection);

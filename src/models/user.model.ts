@@ -2,7 +2,7 @@ import { Pool, ResultSetHeader, RowDataPacket } from 'mysql2/promise';
 import { User } from '../interfaces/user.interface';
 
 export default class UserModel {
-  private connection: Pool;
+  private connection;
 
   constructor(connection: Pool) {
     this.connection = connection;

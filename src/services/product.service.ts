@@ -6,7 +6,7 @@ import 'express-async-errors';
 import { Response } from '../interfaces/response.interface';
 
 export default class ProductService {
-  private model: ProductModel;
+  private model;
 
   constructor() {
     this.model = new ProductModel(connection);

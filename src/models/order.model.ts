@@ -2,7 +2,7 @@ import { Pool, ResultSetHeader } from 'mysql2/promise';
 import { Order } from '../interfaces/order.interface';
 
 export default class OrderModel {
-  private connection: Pool;
+  private connection;
 
   constructor(connection: Pool) {
     this.connection = connection;

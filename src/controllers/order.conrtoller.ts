@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import OrderService from '../services/order.service';
 
 export default class OrderController {
-  private service: OrderService;
+  private service;
 
   constructor() {
     this.service = new OrderService();
