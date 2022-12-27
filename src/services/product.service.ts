@@ -3,7 +3,7 @@ import ProductModel from '../models/product.model';
 import { Product } from '../interfaces/product.interface';
 import { validatesTheCreationOfAProduct } from './validations/validateInputValues';
 import 'express-async-errors';
-import { ResponseForClient } from '../interfaces/response.interface';
+import { ResponseOfError, ResponseOfSuccess } from '../interfaces/response.interface';
 
 export default class ProductService {
   private model;
@@ -12,7 +12,9 @@ export default class ProductService {
     this.model = new ProductModel(connection);
   }
 
-  public create = async ({ name, amount }: Product): Promise<ResponseForClient> => {
+  public create = async (
+    { name, amount }: Product,
+  ): Promise<ResponseOfSuccess<Product> | ResponseOfError> => {
     const { type, message } = validatesTheCreationOfAProduct(name, amount);
     if (type) return { type, message };
 
@@ -21,7 +23,7 @@ export default class ProductService {
     return { type: 'CREATED', message: newProduct };
   };
 
-  public getAll = async (): Promise<ResponseForClient> => {
+  public getAll = async (): Promise<ResponseOfSuccess<Product[]>> => {
     const products = await this.model.getAll();
 
     return { type: 'OK', message: products };

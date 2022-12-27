@@ -1,15 +1,18 @@
-import { Order } from './order.interface';
-import { Product } from './product.interface';
-
-export interface ResponseForClient {
+export interface ResponseOfSuccess<T> {
   type: string;
-  message:
-  string
-  | { userId: number }
-  | Product
-  | Product[]
-  | Order
-  | Order[]
-  | { message: string }
-  | { token: string };
+  message: T
+}
+
+// string
+//   | { userId: number }
+//   | Product
+//   | Product[]
+//   | Order
+//   | Order[]
+//   | { message: string }
+//   | { token: string };
+
+export interface ResponseOfError {
+  type: string;
+  message: string | { message: string }
 }
