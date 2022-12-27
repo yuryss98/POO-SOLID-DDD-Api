@@ -1,15 +1,15 @@
-import { Order, OrderResponse } from './order.interface';
+import { Order } from './order.interface';
 import { Product } from './product.interface';
 
 export interface ResponseForClient {
   type: string;
   message:
   string
+  | { userId: number }
   | Product
   | Product[]
-  | Order[]
   | Order
-  | OrderResponse
+  | Order[]
   | { message: string }
   | { token: string };
 }
