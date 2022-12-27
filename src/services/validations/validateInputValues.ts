@@ -3,14 +3,6 @@ import { ResponseForClient } from '../../interfaces/response.interface';
 import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
 import { User } from '../../interfaces/user.interface';
 
-export const validateLogin = ({ username, password }: Partial<User>): ResponseForClient => {
-  const { error } = loginSchema.validate({ username, password });
-  
-  if (error) return { type: 'BAD_REQUEST', message: { message: error.message } };
-
-  return { type: '', message: '' };
-};
-
 const checkError = (error: ValidationError | undefined) => {
   if (error) {
     if (error.message.includes('is required')) {
@@ -21,6 +13,12 @@ const checkError = (error: ValidationError | undefined) => {
   }
 
   return { type: '', message: '' };
+};
+
+export const validateLogin = ({ username, password }: Partial<User>): ResponseForClient => {
+  const { error } = loginSchema.validate({ username, password });
+  
+  return checkError(error);
 };
 
 export const validatesTheCreationOfAProduct = (name: string, amount: string) => {
