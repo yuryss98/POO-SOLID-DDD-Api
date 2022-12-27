@@ -14,7 +14,7 @@ export default class ProductService {
 
   public create = async ({ name, amount }: Product): Promise<ResponseForClient> => {
     const { type, message } = validatesTheCreationOfAProduct(name, amount);
-    if (type.length) return { type, message };
+    if (type) return { type, message };
 
     const newProduct = await this.model.create(name, amount);
 

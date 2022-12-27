@@ -21,7 +21,7 @@ export default class OrderService {
   public create = async ({ user, productsIds }: Order): Promise<ResponseForClient> => {
     const { data: { userId } } = user;
     const { type, message } = validatesAnOrderRecord(productsIds);
-    if (type.length) return { type, message };
+    if (type) return { type, message };
 
     await this.model.create(userId, productsIds);
 
