@@ -1,5 +1,4 @@
 import { ValidationError } from 'joi';
-import { ResponseOfError } from '../../interfaces/response.interface';
 import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
 import { User } from '../../interfaces/user.interface';
 
@@ -15,7 +14,7 @@ const checkError = (error: ValidationError | undefined) => {
   return { type: '', message: '' };
 };
 
-export const validateLogin = ({ username, password }: Partial<User>): ResponseOfError => {
+export const validateLogin = ({ username, password }: Partial<User>) => {
   const { error } = loginSchema.validate({ username, password });
   
   return checkError(error);
