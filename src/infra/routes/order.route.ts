@@ -3,6 +3,7 @@ import OrderRepository from '../../domain/repository/OrderRepository';
 import OrderUseCase from '../../domain/use-cases/order.usecase';
 import OrderController from '../controllers/order.conrtoller';
 import validateToken from '../middleware/validateToken';
+import { validatesAnOrderRecord } from '../middleware/validations/validateInputValues';
 import connection from '../models/connection';
 import OrderModel from '../models/order.model';
 
@@ -14,6 +15,6 @@ const orderUseCase = new OrderUseCase(orderRepository);
 const orderController = new OrderController(orderUseCase);
 
 router.get('/', orderController.getAll);
-router.post('/', validateToken, orderController.create);
+router.post('/', validatesAnOrderRecord, validateToken, orderController.create);
 
 export default router;

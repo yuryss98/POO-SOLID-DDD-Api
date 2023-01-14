@@ -1,44 +1,44 @@
-// import { ValidationError } from 'joi';
-// import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
-// import { User } from '../../interfaces/user.interface';
+import { ValidationError } from 'joi';
+import { Response, NextFunction, Request } from 'express';
+import HttpException from './HttpException';
+import { loginSchema, orderSchema, productSchema, userSchema } from './schemas';
 
-// const checkError = (error: ValidationError | undefined) => {
-//   if (error) {
-//     if (error.message.includes('is required')) {
-//       return { type: 'BAD_REQUEST', message: { message: error.message } };
-//     }
+const checkError = (error: ValidationError | undefined, next: NextFunction) => {
+  if (error) {
+    if (error.message.includes('is required')) {
+      throw new HttpException(400, error.message);
+    }
 
-//     return { type: 'UNPROCESSABLE_ENTITY', message: { message: error.message } };
-//   }
+    throw new HttpException(422, error.message);
+  }
 
-//   return { type: '', message: '' };
-// };
+  next();
+};
 
-// export const validateLogin = ({ username, password }: Partial<User>) => {
-//   const { error } = loginSchema.validate({ username, password });
+export const validateLogin = (req: Request, _res: Response, next: NextFunction) => {
+  const { error } = loginSchema.validate(req.body);
   
-//   return checkError(error);
-// };
+  return checkError(error, next);
+};
 
-// export const validatesTheCreationOfAProduct = (name: string, amount: string) => {
-//   const { error } = productSchema.validate({ name, amount });
+export const validatesTheCreationOfAProduct = (
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+) => {
+  const { error } = productSchema.validate(req.body);
   
-//   return checkError(error);
-// };
+  return checkError(error, next);
+};
 
-// export const validatesTheCreationOfAUser = (
-//   username: string,
-//   vocation: string,
-//   level: number,
-//   password: string,
-// ) => {
-//   const { error } = userSchema.validate({ username, vocation, level, password });
+export const validatesTheCreationOfAUser = (req: Request, _res: Response, next: NextFunction) => {
+  const { error } = userSchema.validate(req.body);
   
-//   return checkError(error);
-// };
+  checkError(error, next);
+};
 
-// export const validatesAnOrderRecord = (productsIds: number[]) => {
-//   const { error } = orderSchema.validate({ productsIds });
+export const validatesAnOrderRecord = (req: Request, _res: Response, next: NextFunction) => {
+  const { error } = orderSchema.validate(req.body);
 
-//   return checkError(error);
-// };
+  return checkError(error, next);
+};
