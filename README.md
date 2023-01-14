@@ -6,7 +6,7 @@ Este foi meu primeiro projeto usando TypeScript e aproveitei tambem para poder p
 
 A aplicação foi desenvolvida em Node usando o framework express e o pacote mysql2 para fazer um CRUD no banco de dados;
 
-A Api foi desenvolvida seguindo a arquitetura de software de camadas MSC (Model Service Controller);
+A Api foi desenvolvida usando o Paradigma da Orientação a Objetos (POO), seguindo os principios SOLID e o design de software DDD (domain driven design)
 
 Desenvolvi endpoints que estão conectados ao banco de dados seguindo os princípios do REST;
 
