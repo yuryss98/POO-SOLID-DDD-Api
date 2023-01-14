@@ -2,7 +2,7 @@
 
 ---
 
-Este foi meu primeiro projeto usando TypeScript e aproveitei tambem para poder praticar os principios da orientação a objetos. Neste projeto desenvolvi uma API para simular uma loja de itens medievais!
+Este foi meu primeiro projeto usando TypeScript e aproveitei tambem para poder praticar POO, SOLID e DDD. Neste projeto desenvolvi uma API para simular uma loja de itens medievais!
 
 A aplicação foi desenvolvida em Node usando o framework express e o pacote mysql2 para fazer um CRUD no banco de dados;
 
