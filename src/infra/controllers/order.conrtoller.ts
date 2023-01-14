@@ -5,8 +5,6 @@ import connection from '../models/connection';
 import OrderModel from '../models/order.model';
 
 export default class OrderController {
-  public test = 'testando';
-
   constructor(private orderUseCase: OrderUseCase) { }
 
   async getAll(_req: Request, res: Response) {
