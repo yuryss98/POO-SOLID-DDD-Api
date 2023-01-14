@@ -50,10 +50,14 @@ npm install
 ```
 
 ```bash
+npm run build
+```
+
+```bash
 npm start
 ```
 
-## Depois de executar todos os comandos, ja teremos uma aplicação rodando na porta 3000, agora basta usar as query mysql no arquivo Trybesmith.sql para gerar o banco de dados da aplicação e popula-lo!
+## Depois de executar todos os comandos, ja teremos uma aplicação rodando na porta 3000, agora basta usar as query mysql no arquivo Trybesmith.sql para gerar o banco de dados da aplicação e popula-lo. A senha para se conectar com o banco de dados do container docker é "password";
 
 <img src="./docs/docs.gif" alt="giff"/>
 
@@ -110,7 +114,7 @@ npm start
   ```json
       {
         "username": "teste",
-        "password": "123456789
+        "password": "123456789"
       }
   ```
   
