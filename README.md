@@ -28,7 +28,7 @@ git clone git@github.com:yuryss98/project-trybesmith.git
 
 Vá para o diretório do projeto:
 ```bash
-cd project-trybesmith
+cd POO-SOLID-DDD-Api
 ```
 
 Entre no Vs Code para verificar os arquivos usando o atalho no terminal:
