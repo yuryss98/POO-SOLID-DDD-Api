@@ -19,7 +19,7 @@ Desenvolvi endpoints que estão conectados ao banco de dados seguindo os princí
 * Node;
 * Mysql2;
 
-## Execute localmente:
+## Execute localmente (é preciso ter o docker instalado):
 
 Clone o projeto
 ```bash
@@ -31,12 +31,7 @@ Vá para o diretório do projeto:
 cd POO-SOLID-DDD-Api
 ```
 
-Entre no Vs Code para verificar os arquivos usando o atalho no terminal:
-```bash
-code .
-```
-
-Abra O terminal e execute os comandos:
+Execute os seguintes comandos:
 ```bash
 docker-compose up -d
 ```
